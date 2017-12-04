@@ -58,7 +58,7 @@ test('valid multiple permissions with some', function (t) {
   t.plan(1)
   var req = { user: { permissions: ['foo', 'bar'] } }
   var guard = require('../index')({
-    match: 'some'
+    checkPermissions: 'some'
   })
   guard.check(['foo'])(req, res, t.error)
 })
@@ -66,7 +66,7 @@ test('valid multiple permissions with some', function (t) {
 test('invalid multiple permissions with some', function (t) {
   var req = { user: { permissions: ['foo', 'bar'] } }
   var guard = require('../index')({
-    match: 'some'
+    checkPermissions: 'some'
   })
   guard.check(['ping'])(req, res, function (err) {
     if (!err) return t.end('should throw an error')
@@ -79,7 +79,7 @@ test('valid multiple permissions with all', function (t) {
   t.plan(1)
   var req = { user: { permissions: ['foo', 'bar'] } }
   var guard = require('../index')({
-    match: 'all'
+    checkPermissions: 'all'
   })
   guard.check(['foo', 'bar'])(req, res, t.error)
 })
@@ -87,7 +87,7 @@ test('valid multiple permissions with all', function (t) {
 test('invalid multiple permissions with all', function (t) {
   var req = { user: { permissions: ['foo', 'bar'] } }
   var guard = require('../index')({
-    match: 'all'
+    checkPermissions: 'all'
   })
   guard.check(['foo'])(req, res, function (err) {
     if (!err) return t.end('should throw an error')
@@ -96,14 +96,14 @@ test('invalid multiple permissions with all', function (t) {
   })
 })
 
-test('incorrect match configuration value', function (t) {
+test('incorrect checkPermissions configuration value', function (t) {
   var req = { user: { permissions: ['foo', 'bar'] } }
   var guard = require('../index')({
-    match: ''
+    checkPermissions: ''
   })
   guard.check(['foo'])(req, res, function (err) {
     if (!err) return t.end('should throw an error')
-    t.ok(err.code === 'match_undefined', 'correct error code')
+    t.ok(err.code === 'check_permissions_undefined', 'correct error code')
     t.end()
   })
 })

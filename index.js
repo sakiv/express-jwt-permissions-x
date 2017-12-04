@@ -13,7 +13,7 @@ var Guard = function (options) {
   var defaults = {
     requestProperty: 'user',
     permissionsProperty: 'permissions',
-    match: 'all'
+    checkPermissions: 'all'
   }
 
   this._options = xtend(defaults, options)
@@ -21,7 +21,7 @@ var Guard = function (options) {
 
 Guard.prototype = {
 
-  check: function (required) {
+  check: function (required, checkPermissions) {
     if (typeof required === 'string') required = [required]
 
     return _middleware.bind(this)
@@ -29,6 +29,7 @@ Guard.prototype = {
     function _middleware (req, res, next) {
       var self = this
       var options = self._options
+      var check = checkPermissions || options.checkPermissions
 
       if (!options.requestProperty) {
         return next(new UnauthorizedError('request_property_undefined', {
@@ -60,13 +61,13 @@ Guard.prototype = {
         }))
       }
 
-      if (!options.match || options.match === '') {
-        return next(new UnauthorizedError('match_undefined', {
-          message: 'match hasn\'t been defined. Check your configuration.'
+      if (!check || check === '') {
+        return next(new UnauthorizedError('check_permissions_undefined', {
+          message: 'checkPermissions hasn\'t been defined. Check your configuration.'
         }))
       }
 
-      var func = (options.match.toLowerCase() === 'all' ? [].every : [].some)
+      var func = (check.toLowerCase() === 'all' ? [].every : [].some)
 
       var sufficient = func.call(required, function (permission) {
         return permissions.indexOf(permission) !== -1

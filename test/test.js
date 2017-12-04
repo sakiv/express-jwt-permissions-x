@@ -56,8 +56,56 @@ test('invalid permissions [Object] notation', function (t) {
 
 test('valid multiple permissions with some', function (t) {
   t.plan(1)
-  var req = { user: { permissions: ['foo', 'bar'], match: 'some' } }
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  var guard = require('../index')({
+    match: 'some'
+  })
   guard.check(['foo'])(req, res, t.error)
+})
+
+test('invalid multiple permissions with some', function (t) {
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  var guard = require('../index')({
+    match: 'some'
+  })
+  guard.check(['ping'])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
+
+test('valid multiple permissions with all', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  var guard = require('../index')({
+    match: 'all'
+  })
+  guard.check(['foo', 'bar'])(req, res, t.error)
+})
+
+test('invalid multiple permissions with all', function (t) {
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  var guard = require('../index')({
+    match: 'all'
+  })
+  guard.check(['foo'])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+    t.ok(err.code === 'permissions_invalid', 'correct error code')
+    t.end()
+  })
+})
+
+test('incorrect match configuration value', function (t) {
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  var guard = require('../index')({
+    match: ''
+  })
+  guard.check(['foo'])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+    t.ok(err.code === 'match_undefined', 'correct error code')
+    t.end()
+  })
 })
 
 test('permissions array not found', function (t) {

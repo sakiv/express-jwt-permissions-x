@@ -60,7 +60,13 @@ Guard.prototype = {
         }))
       }
 
-      var func = options.match.toLowerCase() === 'all' ? [].every : [].some
+      if (!options.match || options.match === '') {
+        return next(new UnauthorizedError('match_undefined', {
+          message: 'match hasn\'t been defined. Check your configuration.'
+        }))
+      }
+
+      var func = (options.match.toLowerCase() === 'all' ? [].every : [].some)
 
       var sufficient = func.call(required, function (permission) {
         return permissions.indexOf(permission) !== -1

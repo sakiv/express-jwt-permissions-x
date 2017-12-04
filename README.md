@@ -1,7 +1,7 @@
 # Express JWT Permissions
 
 [![Build Status](https://travis-ci.org/sakiv/express-jwt-permissions-x.svg?branch=master)](https://travis-ci.org/sakiv/express-jwt-permissions-x)
-[![npm](https://img.shields.io/npm/dm/express-jwt-permissions.svg?maxAge=2592000)](https://www.npmjs.com/package/express-jwt-permissions)&nbsp;&nbsp;
+[![npm](https://img.shields.io/npm/dm/express-jwt-permissions-x.svg?maxAge=2592000)](https://www.npmjs.com/package/express-jwt-permissions-x)&nbsp;&nbsp;
 
 [![NPM](https://nodei.co/npm/express-jwt-permissions.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/express-jwt-permissions-x/)&nbsp;&nbsp;
 

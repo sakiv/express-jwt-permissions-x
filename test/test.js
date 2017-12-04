@@ -54,6 +54,12 @@ test('invalid permissions [Object] notation', function (t) {
   })
 })
 
+test('valid multiple permissions with some', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: ['foo', 'bar'], match: 'some' } }
+  guard.check(['foo'])(req, res, t.error)
+})
+
 test('permissions array not found', function (t) {
   var req = { user: {} }
   guard.check('ping')(req, res, function (err) {

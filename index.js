@@ -4,13 +4,16 @@ var get = require('lodash.get')
 
 var UnauthorizedError = require('./error')
 var PermissionError = new UnauthorizedError(
-  'permission_denied', { message: 'Permission denied' }
+  'permission_denied', {
+    message: 'Permission denied'
+  }
 )
 
 var Guard = function (options) {
   var defaults = {
     requestProperty: 'user',
-    permissionsProperty: 'permissions'
+    permissionsProperty: 'permissions',
+    match: 'all'
   }
 
   this._options = xtend(defaults, options)
@@ -57,7 +60,9 @@ Guard.prototype = {
         }))
       }
 
-      var sufficient = required.every(function (permission) {
+      var func = options.match.toLowerCase() === 'all' ? [].every : [].some
+
+      var sufficient = func.call(required, function (permission) {
         return permissions.indexOf(permission) !== -1
       })
 

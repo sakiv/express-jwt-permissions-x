@@ -1,7 +1,7 @@
 {
-  "name": "express-jwt-permissions",
-  "version": "1.0.0",
-  "description": "Express middleware for JWT permissions",
+  "name": "express-jwt-permissions-x",
+  "version": "0.1.0",
+  "description": "Express middleware for JWT permissions forked from express-jwt-permissions",
   "main": "./index.js",
   "scripts": {
     "lint": "standard",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichielDeMey/express-jwt-permissions.git"
+    "url": "https://github.com/sakiv/express-jwt-permissions-x.git"
   },
-  "bugs": "https://github.com/MichielDeMey/express-jwt-permissions/issues",
+  "bugs": "https://github.com/sakiv/express-jwt-permissions-x/issues",
   "keywords": [
     "express",
     "middleware",
@@ -21,11 +21,11 @@
     "token",
     "security"
   ],
-  "author": "Michiel De Mey <de.mey.michiel@gmail.com> (http://demey.io)",
+  "author": "Vikas Aggarwal <opensource@sakiv.com> (https://sakiv.github.io)",
   "contributors": [
     {
-      "name": "Gilles De Mey",
-      "email": "gilles.de.mey@gmail.com"
+      "name": "Vikas Aggarwal",
+      "email": "opensource@sakiv.com"
     }
   ],
   "license": "MIT",
